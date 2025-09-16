@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Заказать платье - Saniat's Atelier</title>
+<!-- Подключение современного шрифта -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+<style>
+  /* Общие стили */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* Шапка */
+  header {
+    background: #fff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff4081;
+  }
+
+  .phone-top {
+    font-weight: 600;
+    color: #555;
+    font-size: 16px;
+  }
+
+  /* Заголовок-баннер */
+  .header-banner {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+    padding: 50px 20px;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+    box-shadow: inset 0 4px 8px rgba(0,0,0,0.05);
+  }
+
+  .header-banner h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .header-banner p {
+    font-size: 1.2em;
+    color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Карточки */
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 25px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  }
+
+  .card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .card img:hover {
+    transform: scale(1.02);
+  }
+
+  .card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ff4081;
+    margin-bottom: 12px;
+  }
+
+  .card-desc {
+    font-size: 1em;
+    color: #555;
+    flex-grow: 1;
+  }
+
+  /* Футер карточки */
+  .card-footer {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    border-top: 1px solid #ddd;
+  }
+
+  .btn {
+    margin-top: 20px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #ff6ec4, #7873f5);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .btn:hover {
+    background: linear-gradient(135deg, #fa4c9a, #6a55f3);
+    transform: scale(1.02);
+  }
+
+  /* Модальное окно */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 25px;
+    max-width: 650px;
+    width: 100%;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 2em;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .close-btn:hover {
+    color: #ff4081;
+  }
+
+  /* Разделы сайта */
+  .section {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+  }
+
+  .section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ff4081;
+    text-align: center;
+  }
+
+  .section p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  /* Футер сайта */
+  footer {
+    background: #fff;
+    padding: 30px 20px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    margin-top: 50px;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media(max-width: 768px){
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    .phone-top {
+      margin-top: 10px;
+    }
+    .cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Saniat's Atelier</div>
+  <div class="phone-top">+7 927 387-25-76</div>
+</header>
+
+<!-- Баннер -->
+<div class="header-banner">
+  <h1>Создайте уникальное платье</h1>
+  <p>Индивидуальный пошив по вашим меркам и желанию, чтобы подчеркнуть вашу красоту</p>
+</div>
+
+<!-- Раздел "Как пользоваться" -->
+<div class="section" id="how-to">
+  <h2>Как пользоваться сайтом</h2>
+  <p>Выберите понравившийся стиль платья и нажмите кнопку "Заказать". После этого откроется окно с инструкциями и возможностью связаться с нами через WhatsApp для обсуждения деталей заказа. Мы свяжемся с вами для уточнения всех нюансов и подготовим индивидуальный проект.</p>
+</div>
+
+<!-- Раздел "О нас" -->
+<div class="section" id="about">
+  <h2>О нас</h2>
+  <p>Saniat's Atelier — мастерская по пошиву эксклюзивных платьев, создаваемых по индивидуальному заказу. Наши дизайнеры и портные работают для того, чтобы подчеркнуть вашу красоту и сделать ваш образ уникальным и неповторимым.</p>
+</div>
+
+<!-- Карточки товаров -->
+<section class="cards">
+  <!-- Карточка 1 -->
+  <div class="card">
+    <img src="photo 1.webp" alt="Классика" />
+    <div class="card-body">
+      <div class="card-title">Классическое платье</div>
+      <div class="card-desc">Элегантное платье по индивидуальному заказу с современным стилем и классикой в одном образе.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn" onclick="openModal('classic')">Заказать</button>
+    </div>
+  </div>
+  <!-- Карточка 2 -->
+  <div class="card">
+    <img src="photo 1.webp" alt="Вечернее" />
+    <div class="card-body">
+      <div class="card-title">Вечернее платье</div>
+      <div class="card-desc">Роскошное и эффектное платье для особых случаев, созданное по вашим меркам.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn" onclick="openModal('evening')">Заказать</button>
+    </div>
+  </div>
+  <!-- Карточка 3 -->
+  <div class="card">
+    <img src="photo 1.webp" alt="Повседневное" />
+    <div class="card-body">
+      <div class="card-title">Повседневное платье</div>
+      <div class="card-desc">Комфортное и стильное платье для ежедневной носки. Сделано специально для вас и вашего стиля.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn" onclick="openModal('casual')">Заказать</button>
+    </div>
+  </div>
+</section>
+
+<!-- Модальное окно -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="close-btn" onclick="closeModal()">&times;</div>
+    <div id="modal-text"></div>
+    <button id="actionBtn" class="btn" style="margin-top:20px;">Действие</button>
+  </div>
+</div>
+
+<!-- Футер сайта -->
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Saniat's Atelier. Все права защищены.</p>
+    <p>Контакты: +7 927 387-25-76</p>
+    <p>Разработано (KS)WebStudio</p>
+  </div>
+</footer>
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalText = document.getElementById('modal-text');
+  const actionBtn = document.getElementById('actionBtn');
+
+  function openModal(service) {
+    let content = '';
+    let btnText = '';
+
+    switch(service){
+      case 'classic':
+        content = `
+        <h3 style="margin-bottom:10px;">Инструкция по заказу классического платья</h3>
+        <ol style="margin-left:20px;">
+          <li>Напишите в WhatsApp: +7 927 387-25-76</li>
+          <li>Обсудите ткань, дизайн и цену</li>
+          <li>Договоритесь о доставке (оплата отдельно)</li>
+        </ol>`;
+        btnText = 'Написать в WhatsApp';
+        break;
+      case 'evening':
+        content = `
+        <h3 style="margin-bottom:10px;">Инструкция по заказу вечернего платья</h3>
+        <ol style="margin-left:20px;">
+          <li>Напишите в WhatsApp: +7 927 387-25-76</li>
+          <li>Обсудите дизайн, ткань и стоимость</li>
+          <li>Договоритесь о доставке (оплата отдельно)</li>
+        </ol>`;
+        btnText = 'Отправить заказ в WhatsApp';
+        break;
+      case 'casual':
+        content = `
+        <h3 style="margin-bottom:10px;">Инструкция по заказу повседневного платья</h3>
+        <ol style="margin-left:20px;">
+          <li>Напишите в WhatsApp: +7 927 387-25-76</li>
+          <li>Обсудите материалы, цену и сроки</li>
+          <li>Договоритесь о доставке (оплата отдельно)</li>
+        </ol>`;
+        btnText = 'Отправить заказ в WhatsApp';
+        break;
+    }
+
+    modalText.innerHTML = content;
+    actionBtn.textContent = btnText;
+
+    // Кнопка действия
+    actionBtn.onclick = () => {
+      sendWhatsAppMsg(service);
+    };
+
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  window.onclick = (e) => {
+    if(e.target===modal) closeModal();
+  };
+
+  function sendWhatsAppMsg(service) {
+    const phone = '+7 927 387-25-76'; 
+    const msg = encodeURIComponent(`Здравствуйте! Хочу заказать ${service} платье. Прошу связаться со мной для обсуждения деталей.`);
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+  }
+</script>
+
+</body>
+</html>
